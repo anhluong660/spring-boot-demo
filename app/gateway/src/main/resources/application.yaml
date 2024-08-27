@@ -49,6 +49,11 @@ spring:
           predicates:
             - Path=/elasticsearch/**
 
+      discovery:
+        locator:
+          enabled: false               # enable {true} when use eureka netflix
+          lowerCaseServiceId: true
+
       httpclient:
         connect-timeout: 3000
         response-timeout: 5000
@@ -63,3 +68,14 @@ management:
       show-details: always
     gateway:
       enabled: true
+
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registry-fetch-interval-seconds: 10
+  instance:
+    lease-expiration-duration-in-seconds: 0
+    lease-renewal-interval-in-seconds: 3
+    prefer-ip-address: true

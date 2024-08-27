@@ -1,0 +1,54 @@
+server:
+  port: 20000
+
+spring:
+  application:
+    name: gateway
+
+  # Route configuration
+  cloud:
+    gateway:
+      routes:
+        - id: websocket
+          uri: http://localhost:20001
+          predicates:
+            - Path=/websocket/**
+
+        - id: async
+          uri: http://localhost:20002
+          predicates:
+            - Path=/async/**
+
+        - id: kafka
+          uri: http://localhost:20003
+          predicates:
+            -Path=/kafka/**
+
+        - id: rabbitmq
+          uri: http://localhost:20004
+          predicates:
+            -Path=/rabbitmq/**
+
+        - id: redis
+          uri: http://localhost:20005
+          predicates:
+            -Path=/redis/**
+
+        - id: mongo
+          uri: http://localhost:20006
+          predicates:
+            -Path=/mongo/**
+
+        - id: mybatis
+          uri: http://localhost:20007
+          predicates:
+            -Path=/mybatis/**
+
+        - id: elasticsearch
+          uri: http://localhost:20008
+          predicates:
+            -Path=/elasticsearch/**
+
+      httpclient:
+        connect-timeout: 3000
+        response-timeout: 5000

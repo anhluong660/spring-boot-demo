@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.royal</groupId>
+	<groupId>com.royalhek17</groupId>
 	<artifactId>sample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>

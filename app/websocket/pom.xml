@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.royal</groupId>
+        <groupId>com.royalhek17</groupId>
         <artifactId>sample</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
@@ -22,7 +22,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.royal</groupId>
+            <groupId>com.royalhek17</groupId>
             <artifactId>utils</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

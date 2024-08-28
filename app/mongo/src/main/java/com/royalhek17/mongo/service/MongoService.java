@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MongoService {
 
@@ -32,6 +34,15 @@ public class MongoService {
         UserDO userDO = SampleUtils.copyProperties(user, UserDO.class);
         if (userDO != null) {
             userRepository.save(userDO);
+        }
+    }
+
+    public void addMoreNewUser(List<User> userList) {
+        for (User user : userList) {
+            UserDO userDO = SampleUtils.copyProperties(user, UserDO.class);
+            if (userDO != null) {
+                userRepository.save(userDO);
+            }
         }
     }
 }

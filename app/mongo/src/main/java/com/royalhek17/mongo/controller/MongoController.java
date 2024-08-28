@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/mongo")
 public class MongoController {
@@ -32,5 +34,11 @@ public class MongoController {
     public Response<User> addNewUser(@RequestBody User user) {
         mongoService.addNewUser(user);
         return Response.success(user);
+    }
+
+    @PostMapping("/add-users")
+    public Response<List<User>> addNewMoreUser(@RequestBody List<User> userList) {
+        mongoService.addMoreNewUser(userList);
+        return Response.success(userList);
     }
 }

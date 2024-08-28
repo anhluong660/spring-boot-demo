@@ -49,6 +49,11 @@ spring:
           predicates:
             - Path=/elasticsearch/**
 
+        - id: hibernate
+          uri: http://localhost:20009
+          predicates:
+            - Path=/hibernate/**
+
       discovery:
         locator:
           enabled: false               # enable {true} when use eureka netflix

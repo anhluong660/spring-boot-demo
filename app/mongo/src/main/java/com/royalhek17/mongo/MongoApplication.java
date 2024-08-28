@@ -8,5 +8,9 @@ public class MongoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MongoApplication.class, args);
+
+        System.out.println("++++++++++++++++++++++++++++++++++");
+        System.out.println("[[ Start Spring MongoDB Success ]]");
+        System.out.println("++++++++++++++++++++++++++++++++++");
     }
 }

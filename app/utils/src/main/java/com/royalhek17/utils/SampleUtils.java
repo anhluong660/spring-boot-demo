@@ -3,18 +3,9 @@ package com.royalhek17.utils;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class SampleUtils {
-
-    public static void logError(String message) {
-        LocalDateTime time = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.ms");
-
-        String log = String.format("%s ERROR [%s]: %s", time.format(formatter), Thread.currentThread().getName(), message);
-        System.out.println(log);
-    }
 
     private static boolean isBasicType(Class<?> clazz) {
         return Number.class.isAssignableFrom(clazz)
@@ -53,7 +44,6 @@ public class SampleUtils {
 
             return target;
         } catch (Exception e) {
-            logError("SampleUtils:copyProperties Error: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }

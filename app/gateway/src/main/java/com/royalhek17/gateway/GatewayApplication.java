@@ -1,5 +1,7 @@
 package com.royalhek17.gateway;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -8,11 +10,13 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class GatewayApplication {
 
+    private static final Logger log = LoggerFactory.getLogger(GatewayApplication.class);
+
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
 
-        System.out.println("+++++++++++++++++++++++++++++++");
-        System.out.println("[[ Start Spring Boot Success ]]");
-        System.out.println("+++++++++++++++++++++++++++++++");
+        log.info("+++++++++++++++++++++++++++++++");
+        log.info("[[ Start Spring Boot Success ]]");
+        log.info("+++++++++++++++++++++++++++++++");
     }
 }

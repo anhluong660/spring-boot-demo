@@ -32,17 +32,20 @@ public class SampleUtilsTest {
         Member member = SampleUtils.copyProperties(memberDO, Member.class);
 
         Assert.assertNotNull(member);
-        Assert.assertEquals(memberDO.getId(), member.getId());
-        Assert.assertEquals(memberDO.getName(), member.getName());
-        Assert.assertEquals(memberDO.getSalary(), member.getSalary());
+        Assert.assertEquals(Integer.valueOf(123), member.getId());
+        Assert.assertEquals("John", member.getName());
+        Assert.assertEquals(Double.valueOf(123.45), member.getSalary());
 
-        for (int i = 0; i < 3; i++) {
-            TaskDO taskDO = memberDO.getTaskList().get(i);
-            Task task = member.getTaskList().get(i);
+        List<Task> tasks = taskList.stream()
+                .map(task -> SampleUtils.copyProperties(task, Task.class))
+                .toList();
+        member.setTaskList(tasks);
 
-            Assert.assertEquals(taskDO.getId(), task.getId());
-            Assert.assertEquals(taskDO.getName(), task.getName());
-            Assert.assertEquals(taskDO.getTime(), task.getTime());
+        for (int i = 1; i <= 3; i++) {
+            Task task = member.getTaskList().get(i - 1);
+            Assert.assertEquals(Integer.valueOf(i), task.getId());
+            Assert.assertEquals("task " + i, task.getName());
+            Assert.assertEquals(Double.valueOf(i + 0.5), task.getTime());
         }
     }
 }

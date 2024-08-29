@@ -11,6 +11,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HibernateService {
 
@@ -37,10 +39,8 @@ public class HibernateService {
         }
 
         TaskDO taskDO = SampleUtils.copyProperties(task, TaskDO.class);
-        if (taskDO != null) {
-            taskDO.setMember(memberDO);
-            taskRepository.save(taskDO);
-        }
+        taskDO.setMember(memberDO);
+        taskRepository.save(taskDO);
     }
 
     public Member getMemberById(int id) {
@@ -49,13 +49,19 @@ public class HibernateService {
             return null;
         }
 
-        return SampleUtils.deepCopyProperties(memberDO, Member.class);
+        Member member = SampleUtils.copyProperties(memberDO, Member.class);
+
+        List<Task> tasks = memberDO.getTaskList().stream()
+                .map(task -> SampleUtils.copyProperties(task, Task.class))
+                .toList();
+
+        member.setTaskList(tasks);
+        return member;
+
     }
 
     public void saveMember(Member member) {
         MemberDO memberDO = SampleUtils.copyProperties(member, MemberDO.class);
-        if (memberDO != null) {
-            memberRepository.save(memberDO);
-        }
+        memberRepository.save(memberDO);
     }
 }

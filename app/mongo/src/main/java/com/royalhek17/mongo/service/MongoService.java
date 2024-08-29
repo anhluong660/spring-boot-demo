@@ -26,23 +26,18 @@ public class MongoService {
             return null;
         }
 
-        User user = new User();
         return SampleUtils.copyProperties(userDO, User.class);
     }
 
     public void addNewUser(User user) {
         UserDO userDO = SampleUtils.copyProperties(user, UserDO.class);
-        if (userDO != null) {
-            userRepository.save(userDO);
-        }
+        userRepository.save(userDO);
     }
 
     public void addMoreNewUser(List<User> userList) {
         for (User user : userList) {
             UserDO userDO = SampleUtils.copyProperties(user, UserDO.class);
-            if (userDO != null) {
-                userRepository.save(userDO);
-            }
+            userRepository.save(userDO);
         }
     }
 }

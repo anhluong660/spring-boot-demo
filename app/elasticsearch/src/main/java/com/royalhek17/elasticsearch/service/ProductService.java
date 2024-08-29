@@ -27,9 +27,7 @@ public class ProductService {
 
     public void save(Product product) {
         ProductDO productDO = SampleUtils.copyProperties(product, ProductDO.class);
-        if (productDO != null) {
-            productRepository.save(productDO);
-        }
+        productRepository.save(productDO);
     }
 
     public List<Product> search(String keyword) {

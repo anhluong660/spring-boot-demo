@@ -59,8 +59,6 @@ public class RedisService implements MessageListener {
 
     public void addNewStorage(Storage storage) {
         StorageDO storageDO = SampleUtils.copyProperties(storage, StorageDO.class);
-        if (storageDO != null) {
-            storageRepository.save(storageDO);
-        }
+        storageRepository.save(storageDO);
     }
 }

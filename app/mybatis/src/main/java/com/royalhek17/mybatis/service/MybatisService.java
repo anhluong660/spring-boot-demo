@@ -34,9 +34,7 @@ public class MybatisService {
 
     public void insert(User user) {
         UserDO userDO = SampleUtils.copyProperties(user, UserDO.class);
-        if (userDO != null) {
-            userMapper.insert(userDO);
-        }
+        userMapper.insert(userDO);
     }
 
     public void delete(int id) {

@@ -4,7 +4,7 @@ import com.royalhek17.mybatis.entities.User;
 import com.royalhek17.mybatis.model.UserDO;
 import com.royalhek17.mybatis.repository.UserMapper;
 
-import com.royalhek17.utils.SampleUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,10 @@ public class MybatisService {
             return null;
         }
 
-        return SampleUtils.copyProperties(userDO, User.class);
+        User user = new User();
+        BeanUtils.copyProperties(userDO, user);
+
+        return user;
     }
 
     public User findUserByName(String username) {
@@ -29,11 +32,15 @@ public class MybatisService {
             return null;
         }
 
-        return SampleUtils.copyProperties(userDO, User.class);
+        User user = new User();
+        BeanUtils.copyProperties(userDO, user);
+
+        return user;
     }
 
     public void insert(User user) {
-        UserDO userDO = SampleUtils.copyProperties(user, UserDO.class);
+        UserDO userDO = new UserDO();
+        BeanUtils.copyProperties(user, userDO);
         userMapper.insert(userDO);
     }
 

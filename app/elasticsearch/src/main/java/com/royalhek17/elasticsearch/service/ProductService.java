@@ -3,7 +3,7 @@ package com.royalhek17.elasticsearch.service;
 import com.royalhek17.elasticsearch.dto.Product;
 import com.royalhek17.elasticsearch.model.ProductDO;
 import com.royalhek17.elasticsearch.repository.ProductRepository;
-import com.royalhek17.utils.SampleUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +22,15 @@ public class ProductService {
             return null;
         }
 
-        return SampleUtils.copyProperties(productDO, Product.class);
+        Product product = new Product();
+        BeanUtils.copyProperties(productDO, product);
+
+        return product;
     }
 
     public void save(Product product) {
-        ProductDO productDO = SampleUtils.copyProperties(product, ProductDO.class);
+        ProductDO productDO = new ProductDO();
+        BeanUtils.copyProperties(product, productDO);
         productRepository.save(productDO);
     }
 
@@ -34,7 +38,11 @@ public class ProductService {
         List<ProductDO> productDOList = productRepository.findByNameContaining(keyword);
 
         return productDOList.stream()
-                .map(p -> SampleUtils.copyProperties(p, Product.class))
+                .map(p -> {
+                    Product product = new Product();
+                    BeanUtils.copyProperties(p, product);
+                    return product;
+                })
                 .collect(Collectors.toList());
     }
 }

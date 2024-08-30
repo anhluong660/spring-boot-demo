@@ -4,7 +4,7 @@ import com.royalhek17.mongo.entities.User;
 import com.royalhek17.mongo.model.UserDO;
 import com.royalhek17.mongo.repository.UserRepository;
 
-import com.royalhek17.utils.SampleUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -26,17 +26,22 @@ public class MongoService {
             return null;
         }
 
-        return SampleUtils.copyProperties(userDO, User.class);
+        User user = new User();
+        BeanUtils.copyProperties(userDO, user);
+
+        return user;
     }
 
     public void addNewUser(User user) {
-        UserDO userDO = SampleUtils.copyProperties(user, UserDO.class);
+        UserDO userDO = new UserDO();
+        BeanUtils.copyProperties(user, userDO);
         userRepository.save(userDO);
     }
 
     public void addMoreNewUser(List<User> userList) {
         for (User user : userList) {
-            UserDO userDO = SampleUtils.copyProperties(user, UserDO.class);
+            UserDO userDO = new UserDO();
+            BeanUtils.copyProperties(user, userDO);
             userRepository.save(userDO);
         }
     }

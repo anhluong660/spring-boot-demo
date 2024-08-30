@@ -4,9 +4,9 @@ import com.royalhek17.redis.config.RedisConfig;
 import com.royalhek17.redis.dto.Storage;
 import com.royalhek17.redis.model.StorageDO;
 import com.royalhek17.redis.repository.StorageRepository;
-import com.royalhek17.utils.SampleUtils;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
@@ -54,11 +54,15 @@ public class RedisService implements MessageListener {
             return null;
         }
 
-        return SampleUtils.copyProperties(storageDO, Storage.class);
+        Storage storage = new Storage();
+        BeanUtils.copyProperties(storageDO, storage);
+
+        return storage;
     }
 
     public void addNewStorage(Storage storage) {
-        StorageDO storageDO = SampleUtils.copyProperties(storage, StorageDO.class);
+        StorageDO storageDO = new StorageDO();
+        BeanUtils.copyProperties(storage, storageDO);
         storageRepository.save(storageDO);
     }
 }

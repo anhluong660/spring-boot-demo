@@ -8,6 +8,7 @@ import com.royalhek17.hibernate.repository.MemberRepository;
 import com.royalhek17.hibernate.repository.TaskRepository;
 import com.royalhek17.utils.SampleUtils;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,9 @@ public class HibernateService {
             return null;
         }
 
-        return SampleUtils.copyProperties(taskDO, Task.class);
+        Task task = new Task();
+        BeanUtils.copyProperties(taskDO, task);
+        return task;
     }
 
     @Transactional
@@ -38,7 +41,9 @@ public class HibernateService {
             return;
         }
 
-        TaskDO taskDO = SampleUtils.copyProperties(task, TaskDO.class);
+        TaskDO taskDO = new TaskDO();
+        BeanUtils.copyProperties(task, taskDO);
+
         taskDO.setMember(memberDO);
         taskRepository.save(taskDO);
     }
@@ -49,10 +54,15 @@ public class HibernateService {
             return null;
         }
 
-        Member member = SampleUtils.copyProperties(memberDO, Member.class);
+        Member member = new Member();
+        BeanUtils.copyProperties(memberDO, member);
 
         List<Task> tasks = memberDO.getTaskList().stream()
-                .map(task -> SampleUtils.copyProperties(task, Task.class))
+                .map(taskDO -> {
+                    Task task = new Task();
+                    BeanUtils.copyProperties(taskDO, task);
+                    return task;
+                })
                 .toList();
 
         member.setTaskList(tasks);
@@ -61,7 +71,8 @@ public class HibernateService {
     }
 
     public void saveMember(Member member) {
-        MemberDO memberDO = SampleUtils.copyProperties(member, MemberDO.class);
+        MemberDO memberDO = new MemberDO();
+        BeanUtils.copyProperties(member, memberDO);
         memberRepository.save(memberDO);
     }
 }

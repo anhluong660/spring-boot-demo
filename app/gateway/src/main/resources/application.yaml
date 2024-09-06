@@ -84,3 +84,6 @@ eureka:
     lease-expiration-duration-in-seconds: 0
     lease-renewal-interval-in-seconds: 3
     prefer-ip-address: true
+
+security:
+  jwt-key: "SpringBootDemoApplication-JwtKey-2024"
